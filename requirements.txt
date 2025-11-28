@@ -3,5 +3,5 @@ timm==0.4.9
 transformers==4.8.1
 einops
 opencv-python
-ruamel.yaml
+ruamel.yaml==0.17.21
 cnsenti
