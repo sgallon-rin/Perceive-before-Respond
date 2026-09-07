@@ -156,8 +156,10 @@ class srs_dataset(Dataset):
         sticker_set_id = sticker_set_id
         # 构建图像负样本
         negative_sticker_ids = self.all_stickers[str(sticker_set_id)][:]  # 负样本来自同一个表情包图像集合
-        if str(sticker_id)+'.npy' in negative_sticker_ids:  # emoji_mapping.txt可能没有正样本图像名
-            negative_sticker_ids.remove(str(sticker_id)+'.npy')
+        # emoji_mapping.txt stores bare sticker IDs. The .npy suffix is added
+        # only when loading the image below.
+        if str(sticker_id) in negative_sticker_ids:
+            negative_sticker_ids.remove(str(sticker_id))
         negative_sticker_ids = negative_sticker_ids[:self.sticker_candidates-1]
         # if 0<len(negative_sticker_ids)<self.sticker_candidates-1:
         #     negative_sticker_ids = np.random.choice(negative_sticker_ids, self.sticker_candidates-1)
